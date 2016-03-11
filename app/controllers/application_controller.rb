@@ -2,17 +2,14 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  #before_action :check_customer
+  before_action :authenticate_customer!
 
-  def current_customer
-  	if session[:cust_id]
-  		@cust ||= Customer.find(session[:cust_id])
-  	end
-  end
-  helper_method :current_customer
 
-	def check_cust!
-	  if !session[:cust_id]
-	    redirect_to login_url
-	  end
-	end
+	#def check_customer
+	#	return if (request.fullpath == new_customer_session_path) || (request.fullpath == new_customer_registration_path)
+	#						|| (request.fullpath == new_customer_password) || (request.fullpath == new)
+	#	redirect_to new_customer_session_path unless current_customer
+
+	#end
 end

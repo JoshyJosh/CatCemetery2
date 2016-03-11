@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :check_cust!, only: [:show, :edit, :update, :destroy]
 
   # GET /customers
   # GET /customers.json
@@ -24,6 +25,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
+
     @customer = Customer.new(customer_params)
 
     respond_to do |format|
@@ -35,6 +37,7 @@ class CustomersController < ApplicationController
         format.json { render json: @customer.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /customers/1
@@ -69,6 +72,10 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name, :email, :password, :password_confirm)
+      params.require(:customer).permit(:name, :email, :password)
+    end
+
+    def password_confirm
+      customer_params.password == params.password_confirm
     end
 end

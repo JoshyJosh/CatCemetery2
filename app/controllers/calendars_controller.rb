@@ -1,6 +1,5 @@
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
-  before_action :check_cust!
 
   # GET /calendars
   # GET /calendars.json
@@ -25,11 +24,12 @@ class CalendarsController < ApplicationController
   # POST /calendars
   # POST /calendars.json
   def create
+    calendar_params[:reserved] = true
     @calendar = Calendar.new(calendar_params)
 
     respond_to do |format|
       if @calendar.save
-        format.html { redirect_to @calendar, notice: 'Calendar was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Calendar was successfully created.' }
         format.json { render :show, status: :created, location: @calendar }
       else
         format.html { render :new }

@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :customers
+
   resources :calendars
   resources :customers
   resources :sessions
 
-  get 'signup', to: 'customers#new', as: 'signup'
+  #get 'signup', to: 'customers#new', as: 'signup'
 
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  root 'calendars#index'
+  root to:'calendars#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
