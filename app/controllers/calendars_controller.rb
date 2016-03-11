@@ -24,8 +24,8 @@ class CalendarsController < ApplicationController
   # POST /calendars
   # POST /calendars.json
   def create
-    calendar_params[:reserved] = true
     @calendar = Calendar.new(calendar_params)
+    @calendar.reserved = true
 
     respond_to do |format|
       if @calendar.save
@@ -60,6 +60,11 @@ class CalendarsController < ApplicationController
       format.html { redirect_to calendars_url, notice: 'Calendar was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def logout_customer
+    @notice = "foo"
+    sign_out_and_redirect("/")
   end
 
   private

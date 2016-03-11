@@ -12,4 +12,10 @@ class ApplicationController < ActionController::Base
 	#	redirect_to new_customer_session_path unless current_customer
 
 	#end
+
+	def logout_customer
+		@notice = "foo"
+		sign_out_and_redirect("/")
+	end
+
 end

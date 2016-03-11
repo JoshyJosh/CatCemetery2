@@ -11,6 +11,7 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
+    redirect_to root_url
   end
 
   # GET /customers/new

@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
 	def new
+		redirect_to "calendar#index", notice: "Logged in!"
 	end
 
 	def create
@@ -17,5 +18,9 @@ class SessionsController < ApplicationController
 	def destroy
 		session[:cust_id] = nil
 		redirect_to root_url, notice: "Logged out!"
+	end
+
+	def customer
+		redirec_to "/calendar/index"
 	end
 end
