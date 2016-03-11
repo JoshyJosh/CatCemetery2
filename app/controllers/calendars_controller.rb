@@ -1,6 +1,6 @@
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
-  before_action :check_cust
+  before_action :check_cust!
 
   # GET /calendars
   # GET /calendars.json
@@ -73,9 +73,4 @@ class CalendarsController < ApplicationController
       params.require(:calendar).permit(:res_date, :reserved)
     end
 
-    def check_cust
-      if !session[:cust_id]
-        redirect_to login_url
-      end
-    end
 end

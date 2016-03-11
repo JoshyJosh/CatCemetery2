@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_customer
 
-  def logged_customer
-  	redirect_to root_url unless current_customer
-  end
+	def check_cust!
+	  if !session[:cust_id]
+	    redirect_to login_url
+	  end
+	end
 end
