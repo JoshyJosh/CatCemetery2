@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Res date:</strong>
+  <%= @calendar.res_date %>
+</p>
+
+<p>
+  <strong>Reserved:</strong>
+  <%= @calendar.reserved %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
+<%= link_to 'Back', calendars_path %>

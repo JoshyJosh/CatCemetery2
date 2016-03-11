@@ -8,6 +8,9 @@
         <li><%= message %></li>
       <% end %>
       </ul>
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: name %>
+      <% end %>
     </div>
   <% end %>
 
@@ -19,6 +22,13 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirm %><br>
+    <%= f.text_field :password_confirm %>
   <div class="actions">
     <%= f.submit %>
   </div>
