@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   #before_action :check_customer
   before_action :authenticate_customer!
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
 
 	#def check_customer
@@ -16,6 +17,12 @@ class ApplicationController < ActionController::Base
 	def logout_customer
 		@notice = "foo"
 		sign_out_and_redirect("/")
+	end
+	
+	protected
+	
+	def configure_permitted_parameters
+		devise_parameter_sanitizer.for(:sign_up) << :name
 	end
 
 end

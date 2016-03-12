@@ -7,10 +7,6 @@ class CalendarsController < ApplicationController
     @calendars = Calendar.all
     @customers = Customer.all
     
-    @calendars.each do |c|
-			c.customer_name = @customers.find(c.customer_id).name
-		end
-    
   end
 
   # GET /calendars/1

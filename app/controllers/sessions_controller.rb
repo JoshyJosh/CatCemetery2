@@ -21,6 +21,6 @@ class SessionsController < ApplicationController
 	end
 
 	def customer
-		redirec_to "/calendar/index"
+		redirect_to "/calendar/index"
 	end
 end

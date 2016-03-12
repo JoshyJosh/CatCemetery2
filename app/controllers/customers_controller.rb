@@ -79,4 +79,5 @@ class CustomersController < ApplicationController
     def password_confirm
       customer_params.password == params.password_confirm
     end
+
 end
