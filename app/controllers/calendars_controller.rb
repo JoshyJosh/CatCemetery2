@@ -5,6 +5,12 @@ class CalendarsController < ApplicationController
   # GET /calendars.json
   def index
     @calendars = Calendar.all
+    @customers = Customer.all
+    
+    @calendars.each do |c|
+			c.customer_name = @customers.find(c.customer_id).name
+		end
+    
   end
 
   # GET /calendars/1
@@ -26,6 +32,7 @@ class CalendarsController < ApplicationController
   def create
     @calendar = Calendar.new(calendar_params)
     @calendar.reserved = true
+    @calendar.customer_id = current_customer.id
 
     respond_to do |format|
       if @calendar.save

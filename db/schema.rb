@@ -14,10 +14,11 @@
 ActiveRecord::Schema.define(version: 20160311120758) do
 
   create_table "calendars", force: :cascade do |t|
+    t.integer  "customer_id"
     t.datetime "res_date"
     t.boolean  "reserved"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "customers", force: :cascade do |t|
