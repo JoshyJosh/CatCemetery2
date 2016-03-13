@@ -1,4 +1,6 @@
 class CalendarsController < ApplicationController
+	require 'open-uri'
+	require 'json'
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
 
   # GET /calendars
@@ -7,6 +9,8 @@ class CalendarsController < ApplicationController
     @calendars = Calendar.all
     @customers = Customer.all
     
+    @source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
+		@weather = JSON.parse(open(@source).read)
   end
 
   # GET /calendars/1
