@@ -1,1 +1,5 @@
-<%= @calendars.first.customer_id %>
+<h1>Schedule for <%= @date %></h1>
+<% if @calendar %>
+	<%= @calendars.first.customer_id %>
+<% end %>
+<%= link_to "Calendar", calendars_path %>
