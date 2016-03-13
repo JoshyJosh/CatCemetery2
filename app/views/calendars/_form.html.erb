@@ -10,10 +10,14 @@
       </ul>
     </div>
   <% end %>
-
+	<div class="field">
+		<%= f.label :res_date %><br>
+		<%= f.date_select(:res_date) %>
+	</div>
+	
   <div class="field">
     <%= f.label :res_date %><br>
-    <%= f.datetime_select :res_date %>
+    <%= f.time_select(:res_date, :discard_minute => true, prompt: {hour: Time.now.hour, minute: "00"})%>:00
   </div>
   <div class="actions">
     <%= f.submit %>

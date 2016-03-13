@@ -19,6 +19,9 @@ gem 'therubyracer', platforms: :ruby
 # For authentication
 gem 'devise'
 
+# Tables for the calendar
+gem "watu_table_builder", :require => "table_builder"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

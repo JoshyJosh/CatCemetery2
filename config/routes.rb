@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :customers
-
+	
+	get '/calendars/schedule' => 'calendars#schedule'
   resources :calendars
-  #get 'signup', to: 'customers#new', as: 'signup'
 
 
   root to:'calendars#index'

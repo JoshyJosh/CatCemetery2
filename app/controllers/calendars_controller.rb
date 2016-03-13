@@ -70,6 +70,16 @@ class CalendarsController < ApplicationController
     sign_out_and_redirect("/")
   end
 
+	# for daily schedules
+	def schedule
+		@calendars = Calendar.all
+  
+		if params[:date]
+			@date = DateTime.parse(params[:date]).strftime("%Y%m%d")
+			@calendars = @calendars.where("strftime('%Y%m%d', res_date)  = ?", @date)
+		end
+	end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_calendar
