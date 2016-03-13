@@ -3,3 +3,26 @@
 	<%= @calendars.first.customer_id %>
 <% end %>
 <%= link_to "Calendar", calendars_path %>
+
+<table>
+	<thead>
+		<tr>
+			<th>Hour</th>
+			<th>Reserved</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @daily_schedule.each do |hour| %>
+		<tr>
+			<td><%= hour[:time] %></td>
+			<td>
+				<% if hour[:reservable] == true %>
+					Open
+				<% else %>
+					Reserved
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -70,13 +70,21 @@ class CalendarsController < ApplicationController
     sign_out_and_redirect("/")
   end
 
-	# for daily schedules
+	# Daily schedule controller
 	def schedule
 		@calendars = Calendar.all
   
 		if params[:date]
-			@date = DateTime.parse(params[:date]).strftime("%Y%m%d")
-			@calendars = @calendars.where("strftime('%Y%m%d', res_date)  = ?", @date)
+			@date = DateTime.parse(params[:date]).strftime("%Y-%m-%d")
+			# Query for sqlite for postgres use extract method
+			@calendars = @calendars.where("strftime('%Y-%m-%d', res_date)  = ?", @date)
+			
+			@daily_schedule = []
+			
+			(0..23).each do |hour|
+				@reservable = @calendars.where("strftime('%H', res_date) = ?", hour.to_s).empty?
+				@daily_schedule << {time: hour.to_s + ":00", reservable: @reservable}
+			end
 		end
 	end
 
