@@ -77,13 +77,29 @@ class CalendarsController < ApplicationController
 		if params[:date]
 			@date = DateTime.parse(params[:date]).strftime("%Y-%m-%d")
 			# Query for sqlite for postgres use extract method
-			@calendars = @calendars.where("strftime('%Y-%m-%d', res_date)  = ?", @date)
+			@calendars = @calendars.where("strftime('%Y-%m-%d', res_date) = ?", @date)
 			
 			@daily_schedule = []
 			
+			#24 hour schedule
 			(0..23).each do |hour|
-				@reservable = @calendars.where("strftime('%H', res_date) = ?", hour.to_s).empty?
-				@daily_schedule << {time: hour.to_s + ":00", reservable: @reservable}
+				@hour = hour.to_s
+				
+				if @hour.length == 1  
+					@hour = "0" + @hour
+				else
+					@hour 
+				end
+				
+				@reservable = @calendars.where("strftime('%H', res_date) = ?", @hour).empty?
+				
+				if @reservable == true
+					@reservation_details = params[:date] + " " + @hour
+				end
+				
+				@daily_schedule << {time: @hour + ":00",
+														reservable: @reservable,
+														reservation_details: DateTime.parse(@reservation_details)}
 			end
 		end
 	end

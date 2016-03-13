@@ -1,7 +1,5 @@
 <h1>Schedule for <%= @date %></h1>
-<% if @calendar %>
-	<%= @calendars.first.customer_id %>
-<% end %>
+
 <%= link_to "Calendar", calendars_path %>
 
 <table>
@@ -17,7 +15,9 @@
 			<td><%= hour[:time] %></td>
 			<td>
 				<% if hour[:reservable] == true %>
-					Open
+					<%= button_to('Reserve', 
+												action: "create", 
+											  :calendar => {:res_date => hour[:reservation_details]}) %>
 				<% else %>
 					Reserved
 				<% end %>
