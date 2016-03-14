@@ -10,9 +10,9 @@
 	<%= c.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
 	<%= c.day(:day_method => :res_date) do |day, calendar| %>
 		<%= day.day %><br>
-		<%= calendar.length %>
+		<%= "Number of reservaions: " + calendar.length.to_s %><br>
 		<%= link_to "Check schedule", {controller: "calendars", action: "schedule", date: day} %>
 	<% end %>
 <% end %>
 
-<%= @weather.first %>
+

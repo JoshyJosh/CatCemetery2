@@ -11,6 +11,9 @@ class CalendarsController < ApplicationController
     
     @source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
 		@weather = JSON.parse(open(@source).read)
+		
+		# Need a helper to go with this
+		#		<%= #"Weather:"  + @weather["list"][0]["dt_txt"] %><br>
   end
 
   # GET /calendars/1
