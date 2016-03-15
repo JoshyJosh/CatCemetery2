@@ -82,10 +82,15 @@ class CalendarsController < ApplicationController
 		@calendars = Calendar.all
   
 		if params[:date]
-			@date = DateTime.parse(params[:date]).strftime("%Y-%m-%d")
-			# Query for sqlite for postgres use extract method
-			@calendars = @calendars.where("strftime('%Y-%m-%d', res_date) = ?", @date)
-			
+			@page_date = params[:date]
+			#@date = Time.gm(params[:date]+ " 00:00")
+			@day_start = DateTime.parse(@page_date + " 00:00")
+			@day_end = DateTime.parse(@page_date + " 23:59")
+			# Query for sqlite
+			#@calendars = @calendars.where("strftime('%Y-%m-%d', res_date) = ?", @date)
+			# Query for pg
+			@calendars = @calendars.where("res_date >= ?", @day_start)
+			@calendars = @calendars.where("res_date < ?", @day_end)
 			@daily_schedule = []
 			
 			#24 hour schedule
@@ -98,7 +103,10 @@ class CalendarsController < ApplicationController
 					@hour 
 				end
 				
-				@reservable = @calendars.where("strftime('%H', res_date) = ?", @hour).empty?
+				# Check if the hour can be reserved
+				#@reservable = @calendars.where("strftime('%H', res_date) = ?", @hour).empty?
+				@res_hour = DateTime.parse(@page_date + " " + @hour)
+				@reservable = @calendars.where("res_date = ?", @res_hour).empty?
 				
 				if @reservable == true
 					@reservation_details = params[:date] + " " + @hour
