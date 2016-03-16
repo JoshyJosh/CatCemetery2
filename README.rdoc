@@ -8,11 +8,17 @@ Its now available on heroku https://mighty-badlands-75669.herokuapp.com/calendar
 
 Current TODO list:
 
-* Month selection for calendar
-
 * Daily (possibly 3 hourly) weather reports
 
+* Add daily schedule (24 hour cemetery services are odd gonna go 7:00 to 19:00)
+
 * Include bootstrap
+
+* UI cleanup
+
+* Syntax cleanup
+
+* Optimization (waaay too many variables and calls)
 
 * New things that may or may not pop up
 

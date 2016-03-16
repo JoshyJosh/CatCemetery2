@@ -46,6 +46,9 @@ group :development, :test do
   
   # Pry for debugging
   gem 'pry'
+  
+  #Rubocop for syntax cleanup
+  gem 'rubocop', '~> 0.38.0', require: false
 end
 
 group :development do
