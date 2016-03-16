@@ -3,7 +3,7 @@
 This is a test project where you can reserve hourly time slots for your 
 cats burials. 
 
-Its now available on heroku https://mighty-badlands-75669.herokuapp.com/calendars
+Its now available on heroku https://mighty-badlands-75669.herokuapp.com/
 
 
 Current TODO list:
