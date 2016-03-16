@@ -5,8 +5,11 @@
 <%= link_to "Log Out", destroy_customer_session_path, method: :delete %>
 
 <br>
+<%= link_to "<<", calendars_path(date: prev_month) %>
+<h2><%= @calendar_date.strftime("%B, %Y") %></h2>
+<%= link_to ">>", calendars_path(date: next_month) %>
 
-<%= calendar_for (@calendars) do |c| %>
+<%= calendar_for(@calendars, :year => @calendar_date.year, :month => @calendar_date.month) do |c| %>
 	<%= c.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
 	<%= c.day(:day_method => :res_date) do |day, calendar| %>
 		<%= day.day %><br>

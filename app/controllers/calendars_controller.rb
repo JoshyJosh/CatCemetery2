@@ -7,7 +7,17 @@ class CalendarsController < ApplicationController
   # GET /calendars.json
   def index
     @calendars = Calendar.all
-    @customers = Customer.all
+    #@customers = Customer.all
+    @current_date = DateTime.now
+    @calendar_date = @current_date
+    
+    if params[:date]
+			@calendar_date = DateTime.parse(params[:date])
+			#binding.pry
+			#@calendar_date_query = @calendar_date.strftime("%Y-%m")
+			@calendars = @calendars.where("extract(year from res_date) = ?", @calendar_date.year)
+			@calendars = @calendars.where("extract(month from res_date) = ?", @calendar_date.month)
+    end
     
     @source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
 		@weather = JSON.parse(open(@source).read)
