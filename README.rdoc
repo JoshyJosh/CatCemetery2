@@ -8,7 +8,7 @@ Its now available on heroku https://mighty-badlands-75669.herokuapp.com/
 
 Current TODO list:
 
-* Daily (possibly 3 hourly) weather reports
+* Daily schedule weather reports (every 3 hours)
 
 * Add daily schedule (24 hour cemetery services are odd gonna go 7:00 to 19:00)
 
