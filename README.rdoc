@@ -20,6 +20,10 @@ Current TODO list:
 
 * Optimization (waaay too many variables and calls)
 
+* Redirects from calendar navigation
+
+* Better calendar navigation
+
 * New things that may or may not pop up
 
 

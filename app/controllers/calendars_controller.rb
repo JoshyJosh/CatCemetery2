@@ -2,7 +2,9 @@ class CalendarsController < ApplicationController
 	require 'open-uri'
 	require 'json'
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
-
+	
+	# Openweather json file url
+	@@source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
   # GET /calendars
   # GET /calendars.json
   def index
@@ -11,6 +13,7 @@ class CalendarsController < ApplicationController
     @current_date = DateTime.now
     @calendar_date = @current_date
     
+    # Get next months calendar registrations
     if params[:date]
 			@calendar_date = DateTime.parse(params[:date])
 			#binding.pry
@@ -19,8 +22,8 @@ class CalendarsController < ApplicationController
 			@calendars = @calendars.where("extract(month from res_date) = ?", @calendar_date.month)
     end
     
-    @source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
-		@weather = JSON.parse(open(@source).read)
+    # Get openweather api json file
+		@weather = JSON.parse(open(@@source).read)
 		
 		#binding.pry
 		# Need a helper to go with this
@@ -93,10 +96,12 @@ class CalendarsController < ApplicationController
 		@calendars = Calendar.all
   
 		if params[:date]
+			# Get the date of the day of the registration
 			@page_date = params[:date]
-			#@date = Time.gm(params[:date]+ " 00:00")
 			@day_start = DateTime.parse(@page_date + " 00:00")
 			@day_end = DateTime.parse(@page_date + " 23:59")
+			
+			# Get daily reservation dates
 			# Query for sqlite
 			#@calendars = @calendars.where("strftime('%Y-%m-%d', res_date) = ?", @date)
 			# Query for pg

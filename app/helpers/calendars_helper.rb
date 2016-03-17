@@ -1,19 +1,27 @@
 module CalendarsHelper
 	@@daily_weather_iterator = 0
 	
+	#Gets previous months calendar
 	def prev_month
+		#Reset daily weather iterator for daily weather reports
 		@@daily_weather_iterator = 0
+		# Set to December of previous year if on the end of year in index
 		if @calendar_date.month == 1
 			DateTime.new(@calendar_date.year-1, 12)
+		# Set to previous month
 		else
 			DateTime.new(@calendar_date.year, @calendar_date.month-1)
 		end
 	end
 	
+	#Gets next months calendar
 	def next_month
+		#reset daily weather iterator
 		@@daily_weather_iterator = 0
+		# Set to January next year if on the end of the year in index
 		if @calendar_date.month == 12
 			DateTime.new(@calendar_date.year+1, 1)
+		# Set to next month if you choose the next page
 		else
 			DateTime.new(@calendar_date.year, @calendar_date.month+1)
 		end

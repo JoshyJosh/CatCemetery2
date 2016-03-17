@@ -6,21 +6,13 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_customer!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-
-	#def check_customer
-	#	return if (request.fullpath == new_customer_session_path) || (request.fullpath == new_customer_registration_path)
-	#						|| (request.fullpath == new_customer_password) || (request.fullpath == new)
-	#	redirect_to new_customer_session_path unless current_customer
-
-	#end
-
 	def logout_customer
 		@notice = "foo"
 		sign_out_and_redirect("/")
 	end
 	
 	protected
-	
+	# Mostly useless but would use it for welcome page
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.for(:sign_up) << :name
 	end
