@@ -26,8 +26,6 @@ class CalendarsController < ApplicationController
 		@weather = JSON.parse(open(@@source).read)
 		
 		#binding.pry
-		# Need a helper to go with this
-		#		<%= #"Weather:"  + @weather["list"][0]["dt_txt"] %><br>
   end
 
   # GET /calendars/1
@@ -86,11 +84,6 @@ class CalendarsController < ApplicationController
     end
   end
 
-  def logout_customer
-    @notice = "foo"
-    sign_out_and_redirect("/")
-  end
-
 	# Daily schedule controller
 	def schedule
 		@calendars = Calendar.all
@@ -101,7 +94,7 @@ class CalendarsController < ApplicationController
 			@day_start = DateTime.parse(@page_date + " 00:00")
 			@day_end = DateTime.parse(@page_date + " 23:59")
 			
-			# Get daily reservation dates
+			# Get daily res_date schedule
 			# Query for sqlite
 			#@calendars = @calendars.where("strftime('%Y-%m-%d', res_date) = ?", @date)
 			# Query for pg
@@ -120,7 +113,6 @@ class CalendarsController < ApplicationController
 				end
 				
 				# Check if the hour can be reserved
-				#@reservable = @calendars.where("strftime('%H', res_date) = ?", @hour).empty?
 				@res_hour = DateTime.parse(@page_date + " " + @hour)
 				@reservable = @calendars.where("res_date = ?", @res_hour).empty?
 				

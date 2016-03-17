@@ -1,5 +1,6 @@
 module CalendarsHelper
 	@@daily_weather_iterator = 0
+	@@daily_weather_schedule = Hash.new
 	
 	#Gets previous months calendar
 	def prev_month
@@ -40,16 +41,19 @@ module CalendarsHelper
 			# Get todays current weather
 			if @@daily_weather_iterator == 0
 				report = @weather["list"][@@daily_weather_iterator]
-				
+				@@daily_weather_schedule[day.strftime("%Y-%m-%d")] = report
 				#set iterator for next day midday
 				@@daily_weather_iterator = (24 - @weather["list"][@@daily_weather_iterator]["dt_txt"][11..12].to_i)/3 + 4
 				report["weather"][0]["main"].to_s
 			else
 				#binding.pry
-				report = @weather["list"][@@daily_weather_iterator]["weather"][0]["main"].to_s
+				report = @weather["list"][@@daily_weather_iterator]
+				
+				#TODO
+				@@daily_weather_schedule[day.strftime("%Y-%m-%d")] = @weather["list"][@@daily_weather_iterator-4]
 				#iterate to next day
 				@@daily_weather_iterator += 8
-				report
+				report["weather"][0]["main"].to_s
 			end
 		# Cornercase return
 		else

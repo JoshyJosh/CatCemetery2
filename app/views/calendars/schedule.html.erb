@@ -15,9 +15,10 @@
 			<td><%= hour[:time] %></td>
 			<td>
 				<% if hour[:reservable] == true %>
-					<%= button_to('Reserve', 
-												action: "create", 
-											  :calendar => {:res_date => hour[:reservation_details]}) %>
+					<%= button_to('Reserve',
+												{action: "create", 
+											  :calendar => {:res_date => hour[:reservation_details]}},
+												data:{confirm:"Are you sure?"})%>
 				<% else %>
 					Reserved
 				<% end %>
