@@ -12,7 +12,9 @@
 <%= calendar_for(@calendars, :year => @calendar_date.year, :month => @calendar_date.month) do |c| %>
 	<%= c.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
 	<%= c.day(:day_method => :res_date) do |day, calendar| %>
+		<% #binding.pry %>
 		<%= day.day %><br>
+		<%= "Weather: " + calendar_weather(day).to_s %><br>
 		<%= "Number of reservaions: " + calendar.length.to_s %><br>
 		<%= link_to "Check schedule", {controller: "calendars", action: "schedule", date: day} %>
 	<% end %>
