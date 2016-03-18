@@ -3,7 +3,7 @@
 <%= link_to "Log Out", destroy_customer_session_path, method: :delete %>
 
 <br>
-<%= link_to "<<", calendars_path(date: prev_month) %>
+<%= link_to_if(!is_current_month?, "<<", calendars_path(date: prev_month)) %>
 <h2><%= @calendar_date.strftime("%B, %Y") %></h2>
 <%= link_to ">>", calendars_path(date: next_month) %>
 

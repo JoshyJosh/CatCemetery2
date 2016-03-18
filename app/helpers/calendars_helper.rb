@@ -64,4 +64,9 @@ module CalendarsHelper
 	# For daily reports
 	def schedule_weather
 	end
+	
+	# No previous path for current month
+	def is_current_month?
+		@current_date.strftime("%Y-%m") == @calendar_date.strftime("%Y-%m")
+	end
 end
