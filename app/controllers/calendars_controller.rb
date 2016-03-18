@@ -5,6 +5,7 @@ class CalendarsController < ApplicationController
 	
 	# Openweather json file url
 	@@source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
+	
   # GET /calendars
   # GET /calendars.json
   def index
@@ -87,7 +88,8 @@ class CalendarsController < ApplicationController
 	# Daily schedule controller
 	def schedule
 		@calendars = Calendar.all
-  
+		@weather = JSON.parse(open(@@source).read)
+		
 		if params[:date]
 			# Get the date of the day of the registration
 			@page_date = params[:date]
@@ -125,6 +127,7 @@ class CalendarsController < ApplicationController
 														reservation_details: DateTime.parse(@reservation_details)}
 			end
 		end
+		binding.pry
 	end
 
   private
