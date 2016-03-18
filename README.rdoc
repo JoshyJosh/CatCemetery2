@@ -1,6 +1,6 @@
 == Cat Cemetery 2
 
-This is a test project where you can reserve hourly time slots for your 
+This is a test project where you can reserve bi-hourly time slots for your 
 cats burials. 
 
 Its now available on heroku https://mighty-badlands-75669.herokuapp.com/
@@ -20,9 +20,9 @@ Current TODO list:
 
 * Optimization (waaay too many variables and calls)
 
-* Redirects from calendar navigation
+* Redirects from calendar creation
 
-* Better calendar navigation
+* Better calendar navigation (month selection)
 
 * New things that may or may not pop up
 
