@@ -2,7 +2,9 @@ class CalendarsController < ApplicationController
 	require 'open-uri'
 	require 'json'
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
-
+	
+	@@source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
+	
   # GET /calendars
   # GET /calendars.json
   def index
@@ -19,8 +21,7 @@ class CalendarsController < ApplicationController
 			@calendars = @calendars.where("extract(month from res_date) = ?", @calendar_date.month)
     end
     
-    @source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
-		@weather = JSON.parse(open(@source).read)
+		@weather = JSON.parse(open(@@source).read)
 		
 		#binding.pry
 		# Need a helper to go with this
@@ -91,7 +92,8 @@ class CalendarsController < ApplicationController
 	# Daily schedule controller
 	def schedule
 		@calendars = Calendar.all
-  
+		@weather = JSON.parse(open(@@source).read)
+		
 		if params[:date]
 			@page_date = params[:date]
 			#@date = Time.gm(params[:date]+ " 00:00")
@@ -128,6 +130,7 @@ class CalendarsController < ApplicationController
 														reservation_details: DateTime.parse(@reservation_details)}
 			end
 		end
+		binding.pry
 	end
 
   private
