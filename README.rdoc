@@ -12,8 +12,6 @@ Current TODO list:
 
 * Add daily schedule (24 hour cemetery services are odd gonna go 7:00 to 19:00)
 
-* Include bootstrap
-
 * UI cleanup
 
 * Syntax cleanup
