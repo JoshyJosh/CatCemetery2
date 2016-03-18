@@ -2,6 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#calendar_navigator {
+
+	text-align: center;
+	
+	a{
+		font-size: 2em;
+		vertical-align: super;
+	}
+	
+	h2{
+		display:inline-block;
+	}
+}
+
+
 #calendar {
 	
 	tbody{
