@@ -106,6 +106,8 @@ class CalendarsController < ApplicationController
 			
 			#24 hour schedule
 			(0..23).each do |hour|
+				next unless (hour % 2) == 0
+				
 				@hour = hour.to_s
 				
 				if @hour.length == 1  
@@ -127,7 +129,7 @@ class CalendarsController < ApplicationController
 														reservation_details: DateTime.parse(@reservation_details)}
 			end
 		end
-		binding.pry
+		#binding.pry
 	end
 
   private
