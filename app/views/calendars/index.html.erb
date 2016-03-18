@@ -7,7 +7,7 @@
 <h2><%= @calendar_date.strftime("%B, %Y") %></h2>
 <%= link_to ">>", calendars_path(date: next_month) %>
 
-<%= calendar_for(@calendars, :year => @calendar_date.year, :month => @calendar_date.month, :html => {:class => "table table-striped table-hover"}) do |c| %>
+<%= calendar_for(@calendars, :year => @calendar_date.year, :month => @calendar_date.month, :html => {:class => "table table-striped table-hover", id:"calendar"}) do |c| %>
 	<%= c.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
 	<%= c.day(:day_method => :res_date) do |day, calendar| %>
 		<%= day.day %><br>
