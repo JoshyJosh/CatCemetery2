@@ -120,13 +120,14 @@ class CalendarsController < ApplicationController
 				@res_hour = DateTime.parse(@page_date + " " + @hour)
 				@reservable = @calendars.where("res_date = ?", @res_hour).empty?
 
-				if @reservable == true
-					@reservation_details = params[:date] + " " + @hour
-				end
+				#if @reservable == true
+				#	@reservation_details = params[:date] + " " + @hour
+				#end
 
 				@daily_schedule << {time: @hour + ":00",
 														reservable: @reservable,
-														reservation_details: DateTime.parse(@reservation_details)}
+														reservation_details: @res_hour}
+				#binding.pry
 			end
 		end
 		#binding.pry

@@ -16,14 +16,16 @@
 			<td>
 				<% if hour[:reservable] == true %>
 					<%= button_to('Reserve',
-												{action: "create", 
+												{action: "create",
 											  :calendar => {:res_date => hour[:reservation_details]}},
 												data:{confirm:"Are you sure?"})%>
 				<% else %>
 					Reserved
+					<% #binding.pry %>
 				<% end %>
 			</td>
 		</tr>
 		<% end %>
 	</tbody>
 </table>
+<% #binding.pry %>
