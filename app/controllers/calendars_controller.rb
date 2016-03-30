@@ -2,10 +2,10 @@ class CalendarsController < ApplicationController
 	require 'open-uri'
 	require 'json'
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
-	
+
 	# Openweather json file url
 	@@source = "http://api.openweathermap.org/data/2.5/forecast/city?id=3196359&APPID=cf3d48ecd470b5f8204d8e6c4dece1f6"
-	
+
   # GET /calendars
   # GET /calendars.json
   def index
@@ -13,7 +13,7 @@ class CalendarsController < ApplicationController
     #@customers = Customer.all
     @current_date = DateTime.now
     @calendar_date = @current_date
-    
+
     # Get next months calendar registrations
     if params[:date]
 			@calendar_date = DateTime.parse(params[:date])
@@ -22,10 +22,10 @@ class CalendarsController < ApplicationController
 			@calendars = @calendars.where("extract(year from res_date) = ?", @calendar_date.year)
 			@calendars = @calendars.where("extract(month from res_date) = ?", @calendar_date.month)
     end
-    
+
     # Get openweather api json file
 		@weather = JSON.parse(open(@@source).read)
-		
+
 		#binding.pry
   end
 
@@ -89,13 +89,13 @@ class CalendarsController < ApplicationController
 	def schedule
 		@calendars = Calendar.all
 		@weather = JSON.parse(open(@@source).read)
-		
+
 		if params[:date]
 			# Get the date of the day of the registration
 			@page_date = params[:date]
-			@day_start = DateTime.parse(@page_date + " 00:00")
-			@day_end = DateTime.parse(@page_date + " 23:59")
-			
+			@day_start = DateTime.parse(@page_date + " 08:00")
+			@day_end = DateTime.parse(@page_date + " 20:00")
+
 			# Get daily res_date schedule
 			# Query for sqlite
 			#@calendars = @calendars.where("strftime('%Y-%m-%d', res_date) = ?", @date)
@@ -103,27 +103,27 @@ class CalendarsController < ApplicationController
 			@calendars = @calendars.where("res_date >= ?", @day_start)
 			@calendars = @calendars.where("res_date < ?", @day_end)
 			@daily_schedule = []
-			
+
 			#24 hour schedule
-			(0..23).each do |hour|
+			(8..20).each do |hour|
 				next unless (hour % 2) == 0
-				
+
 				@hour = hour.to_s
-				
-				if @hour.length == 1  
+
+				if @hour.length == 1
 					@hour = "0" + @hour
 				else
-					@hour 
+					@hour
 				end
-				
+
 				# Check if the hour can be reserved
 				@res_hour = DateTime.parse(@page_date + " " + @hour)
 				@reservable = @calendars.where("res_date = ?", @res_hour).empty?
-				
+
 				if @reservable == true
 					@reservation_details = params[:date] + " " + @hour
 				end
-				
+
 				@daily_schedule << {time: @hour + ":00",
 														reservable: @reservable,
 														reservation_details: DateTime.parse(@reservation_details)}
