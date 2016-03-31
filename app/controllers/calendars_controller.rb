@@ -78,7 +78,8 @@ class CalendarsController < ApplicationController
   # DELETE /calendars/1
   # DELETE /calendars/1.json
   def destroy
-    @calendar.destroy
+		binding.pry
+		@calendar.destroy
     respond_to do |format|
       format.html { redirect_to calendars_url, notice: 'Calendar was successfully destroyed.' }
       format.json { head :no_content }
@@ -124,9 +125,20 @@ class CalendarsController < ApplicationController
 				#	@reservation_details = params[:date] + " " + @hour
 				#end
 
+				@can_unreserve = false
+				# add unreserve button when reservable is false
+				# need to check if the current_customer has the id
+				if @reservable == false &&
+ 					 @calendars.where("res_date = ?", @res_hour)[0][:customer_id] == current_customer.id
+					@can_unreserve = true
+					@unreserve_id = @calendars.where(res_date: @res_hour)[0].id
+				end
+
 				@daily_schedule << {time: @hour + ":00",
 														reservable: @reservable,
-														reservation_details: @res_hour}
+														reservation_details: @res_hour,
+														unreservable: @can_unreserve,
+														unreserve_id: @unreserve_id}
 				#binding.pry
 			end
 		end

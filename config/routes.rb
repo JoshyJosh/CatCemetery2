@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :customers
-	
+
 	get '/calendars/schedule' => 'calendars#schedule'
-  resources :calendars, only: [:show, :index, :create]
+  resources :calendars, only: [:show, :index, :create, :destroy]
 
 
   root to:'calendars#index'

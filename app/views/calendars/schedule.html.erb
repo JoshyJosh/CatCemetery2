@@ -19,13 +19,16 @@
 												{action: "create",
 											  :calendar => {:res_date => hour[:reservation_details]}},
 												data:{confirm:"Are you sure?"})%>
+				<% elsif hour[:unreservable] == true %>
+					<%= button_to "Destroy",
+												calendar_path(hour[:unreserve_id]),
+												{:method => 'delete',
+												 :calendar => {:res_date => hour[:reservation_details]}}%>
 				<% else %>
 					Reserved
-					<% #binding.pry %>
 				<% end %>
 			</td>
 		</tr>
 		<% end %>
 	</tbody>
 </table>
-<% #binding.pry %>
